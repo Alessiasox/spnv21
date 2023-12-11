@@ -1,4 +1,4 @@
-ROOT: '/media/shared/Jeff/SLAB/spnv2'
+ROOT: '/content/spnv2'
 OUTPUT_DIR: 'outputs'
 LOG_DIR:    'logs'
 SEED: 2021
@@ -16,11 +16,11 @@ CUDNN:
   DETERMINISTIC: False
   ENABLED: True
 DATASET:
-  ROOT: '/home/jeffpark/SLAB/Dataset'
-  DATANAME: 'speedplus'
+  ROOT: '/content/Drive/My Drive/Dataset/RandomLables/images/synthetic'
+  DATANAME: 'images'
   CAMERA: 'camera.json'
-  KEYPOINTS: 'models/tangoPoints.mat' # w.r.t. DATASET.ROOT
-  CADMODEL:  'models/tango.ply'       # w.r.t. DATASET.ROOT
+  KEYPOINTS: 'tango3Dpoints.mat' # w.r.t. DATASET.ROOT
+  CADMODEL:  'mainbody.ply'       # w.r.t. DATASET.ROOT
   IMAGE_SIZE: [1920, 1200]
   INPUT_SIZE: [768, 512]
   OUTPUT_SIZE: [4, 8, 16, 32, 64, 128] # Division factor from INPUT_SIZE (P2 ~ P7)

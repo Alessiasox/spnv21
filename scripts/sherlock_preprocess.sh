@@ -13,8 +13,8 @@
 #ROOT=$HOME/spnv2
 #DROOT=$GROUP_HOME/datasets
 
-ROOT=/media/shared/Jeff/SLAB/spnv2
-DROOT=/home/jeffpark/SLAB/Dataset
+ROOT=/content/spnv2
+DROOT=/content/Drive/My Drive/Dataset/RandomLables/images/synthetic
 
 for JSON in synthetic/train.json synthetic/validation.json
 do

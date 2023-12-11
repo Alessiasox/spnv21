@@ -69,7 +69,7 @@ def main():
     keypts3d = load_tango_3d_keypoints(cfg.DATASET.KEYPOINTS) # (11, 3) [m]
 
     # Where to save CSV?
-    if 'speedplus' in cfg.DATASET.DATANAME:
+    if 'images' in cfg.DATASET.DATANAME:
         domain, split = args.jsonfile.split('/')
     elif cfg.DATASET.DATANAME == 'prisma25':
         domain, split = '', args.jsonfile
@@ -116,8 +116,8 @@ def main():
 
         # ---------- Read labels
         if args.load_labels:
-            q_vbs2tango = np.array(labels[idx]['q_vbs2tango_true'], dtype=np.float32)
-            r_Vo2To_vbs = np.array(labels[idx]['r_Vo2To_vbs_true'], dtype=np.float32)
+            q_vbs2tango = np.array(labels[idx]['q_vbs2tango'], dtype=np.float32)
+            r_Vo2To_vbs = np.array(labels[idx]['r_Vo2To_vbs'], dtype=np.float32)
 
         # ---------- Project keypoints & origin
         if args.load_labels:

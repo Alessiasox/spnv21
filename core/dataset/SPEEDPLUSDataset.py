@@ -157,7 +157,7 @@ class SPEEDPLUSDataset(torch.utils.data.Dataset):
         logger.info(f'{mode} on {csvfile}')
 
         # Current domain
-        if 'speedplus' in cfg.DATASET.DATANAME:
+        if 'images' in cfg.DATASET.DATANAME:
             domain = csvfile.split('/')[0]
         elif cfg.DATASET.DATANAME == 'prisma25':
             domain = ''

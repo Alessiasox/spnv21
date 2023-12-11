@@ -18,7 +18,7 @@ _C = CN()
 # ------------------------------------------------------------------------------ #
 # Basic settings
 # ------------------------------------------------------------------------------ #
-_C.ROOT       = '/media/shared/Jeff/SLAB/spnv2'     # Root directory of this project (.../spnv2)
+_C.ROOT       = '/content/spnv2'     # Root directory of this project (.../spnv2)
 _C.OUTPUT_DIR = 'outputs'                           # Name of the folder to save training outputs
 _C.LOG_DIR    = 'log'                               # Name of the folder to save trainings logs
 _C.EXP_NAME   = 'exp1'                              # Current experiment name
@@ -49,11 +49,11 @@ _C.DIST.MULTIPROCESSING_DISTRIBUTED = False
 _C.DATASET = CN()
 
 # - Basic directory & files
-_C.DATASET.ROOT      = '/Users/taehapark/SLAB/Dataset'      # Root directory of all datasets
-_C.DATASET.DATANAME  = 'speedplus'                          # Dataset name
-_C.DATASET.CAMERA    = 'camera.json'                        # .json file containing camera parameters
-_C.DATASET.KEYPOINTS = 'models/tangoPoints.mat'             # .mat file containing [3 x N] keypoints (m)
-_C.DATASET.CADMODEL  = 'models/tango.ply'                   # .ply file containing target 3D model
+_C.DATASET.ROOT      = '/content/Drive/My Drive/Dataset/RandomLables/images/synthetic'      # Root directory of all datasets
+_C.DATASET.DATANAME  = 'images'                                 # Dataset name
+_C.DATASET.CAMERA    = 'camera.json'                               # .json file containing camera parameters
+_C.DATASET.KEYPOINTS = 'tango3Dpoints.mat'                    # .mat file containing [3 x N] keypoints (m)
+_C.DATASET.CADMODEL  = 'mainbody.ply'                          # .ply file containing target 3D model
 
 # - Dataset characteristics
 _C.DATASET.NUM_KEYPOINTS   = 11                             # Number of keypoints to detect
