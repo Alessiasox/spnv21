@@ -159,13 +159,13 @@ class SPEEDPLUSDataset(torch.utils.data.Dataset):
         # Current domain
         if 'images' in cfg.DATASET.DATANAME:
             domain = csvfile.split('/')[0]
-        elif cfg.DATASET.DATANAME == 'prisma25':
-            domain = ''
-        elif 'shirt' in cfg.DATASET.DATANAME:
-            splits = csvfile.split('/')
-            domain = splits[0] + '/' + splits[1]
-        else:
-            raise AssertionError('Only speedplus and prisma25 datasets are supported')
+        # elif cfg.DATASET.DATANAME == 'prisma25':
+        #     domain = ''
+        # elif 'shirt' in cfg.DATASET.DATANAME:
+        #     splits = csvfile.split('/')
+        #     domain = splits[0] + '/' + splits[1]
+        # else:
+        #     raise AssertionError('Only speedplus and prisma25 datasets are supported')
 
         # Read CSV file to pandas
         csv = pd.read_csv(join(self.root, csvfile), header=None)

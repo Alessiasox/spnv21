@@ -14,7 +14,7 @@
 #DROOT=$GROUP_HOME/datasets
 
 ROOT=/content/spnv2
-DROOT=/content/Drive/My Drive/Dataset/RandomLables/images/synthetic
+DROOT=/content/drive/My drive/Dataset/RandomLables/images/synthetic
 
 for JSON in synthetic/train.json synthetic/validation.json
 do

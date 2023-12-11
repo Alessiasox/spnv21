@@ -49,7 +49,7 @@ _C.DIST.MULTIPROCESSING_DISTRIBUTED = False
 _C.DATASET = CN()
 
 # - Basic directory & files
-_C.DATASET.ROOT      = '/content/Drive/My Drive/Dataset/RandomLables/images/synthetic'      # Root directory of all datasets
+_C.DATASET.ROOT      = '/content/drive/My drive/Dataset/RandomLables/images/synthetic'      # Root directory of all datasets
 _C.DATASET.DATANAME  = 'images'                                 # Dataset name
 _C.DATASET.CAMERA    = 'camera.json'                               # .json file containing camera parameters
 _C.DATASET.KEYPOINTS = 'tango3Dpoints.mat'                    # .mat file containing [3 x N] keypoints (m)

@@ -76,7 +76,7 @@ def build_transforms(cfg, is_train=True, load_labels=True):
 if __name__=='__main__':
 
     from PIL import Image
-    data = Image.open('/Users/taehapark/SLAB/Dataset/speedplus/synthetic/images/img000100.jpg').convert('RGB')
+    data = Image.open('/content/drive/My drive/Dataset/RandomLables/images/synthetic/images/img000100.jpg').convert('RGB')
 
     transforms = build_transforms((480, 320))
 

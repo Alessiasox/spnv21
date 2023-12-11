@@ -57,7 +57,7 @@ def main():
     datadir = os.path.join(cfg.DATASET.ROOT, cfg.DATASET.DATANAME)
 
     # Read labels from JSON file
-    jsonfile = os.path.join(datadir, args.jsonfile)
+    jsonfile = os.path.join(cfg.DATASET.ROOT, args.jsonfile)
     print(f'Reading JSON file from {jsonfile}...')
     with open(jsonfile, 'r') as f:
         labels = json.load(f) # list
@@ -71,17 +71,17 @@ def main():
     # Where to save CSV?
     if 'images' in cfg.DATASET.DATANAME:
         domain, split = args.jsonfile.split('/')
-    elif cfg.DATASET.DATANAME == 'prisma25':
-        domain, split = '', args.jsonfile
-    elif 'shirt' in cfg.DATASET.DATANAME:
-        traj, domain, split = args.jsonfile.split('/')
-        domain = traj + '/' + domain
-    else:
-        raise NotImplementedError('Only accepting speedplus and prisma25')
-    outdir = os.path.join(datadir, domain, 'labels')
-    if not os.path.exists(outdir): os.makedirs(outdir)
-    csvfile = os.path.join(outdir, split.replace('json', 'csv'))
-    print(f'Label CSV file will be saved to {csvfile}')
+    # elif cfg.DATASET.DATANAME == 'prisma25':
+    #     domain, split = '', args.jsonfile
+    # elif 'shirt' in cfg.DATASET.DATANAME:
+    #     traj, domain, split = args.jsonfile.split('/')
+    #     domain = traj + '/' + domain
+    # else:
+    #     raise NotImplementedError('Only accepting speedplus and prisma25')
+    # outdir = os.path.join(datadir, domain, 'labels')
+    # if not os.path.exists(outdir): os.makedirs(outdir)
+    # csvfile = os.path.join(outdir, split.replace('json', 'csv'))
+    # print(f'Label CSV file will be saved to {csvfile}')
 
     # Where to save resized image?
     imagedir = os.path.join(datadir, domain,
