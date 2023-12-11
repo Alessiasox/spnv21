@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SPNv2: Robust Multi-task Learning and Online Refinement for Spacecraft Pose Estimation across Domain Gap
 
 This repository is developed by Tae Ha "Jeff" Park at [Space Rendezvous Laboratory (SLAB)](slab.stanford.edu) of Stanford University.
@@ -129,3 +130,6 @@ The SPNv2 repository is released under the MIT License (see `LICENSE.md` for mor
 	doi = {10.1016/j.asr.2023.03.036},
 }
 ```
+=======
+# spnv2
+>>>>>>> 207f106876e208f6f8dc7f93d2bbdbdf5ac0667a
