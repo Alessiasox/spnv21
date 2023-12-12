@@ -83,10 +83,10 @@ def main():
     #     domain = traj + '/' + domain
     # else:
     #     raise NotImplementedError('Only accepting speedplus and prisma25')
-    # outdir = os.path.join(datadir, domain, 'labels')
-    # if not os.path.exists(outdir): os.makedirs(outdir)
-    # csvfile = os.path.join(outdir, split.replace('json', 'csv'))
-    # print(f'Label CSV file will be saved to {csvfile}')
+    outdir = os.path.join(datadir, domain, 'labels')
+    if not os.path.exists(outdir): os.makedirs(outdir)
+    csvfile = os.path.join(outdir, split.replace('json', 'csv'))
+    print(f'Label CSV file will be saved to {csvfile}')
 
     # Where to save resized image?
     imagedir = os.path.join(datadir, domain,
