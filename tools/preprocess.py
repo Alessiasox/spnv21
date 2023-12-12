@@ -69,8 +69,13 @@ def main():
     keypts3d = load_tango_3d_keypoints(cfg.DATASET.KEYPOINTS) # (11, 3) [m]
 
     # Where to save CSV?
-    if 'images' in cfg.DATASET.DATANAME:
-        domain, split = args.jsonfile.split('/')
+   
+    if '/' in args.jsonfile:
+           domain, split = args.jsonfile.split('/')
+    else:
+           domain = ''
+    split = args.jsonfile
+
     # elif cfg.DATASET.DATANAME == 'prisma25':
     #     domain, split = '', args.jsonfile
     # elif 'shirt' in cfg.DATASET.DATANAME:
