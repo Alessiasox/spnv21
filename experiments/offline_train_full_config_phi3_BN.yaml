@@ -17,7 +17,7 @@ CUDNN:
   ENABLED: True
 DATASET:
   ROOT: '/content/drive/MyDrive/Dataset/RandomLables/images/synthetic'
-  DATANAME: 'speedplus'
+  DATANAME: 'images'
   CAMERA: 'camera.json'
   KEYPOINTS: 'tango3Dpoints.mat' # w.r.t. DATASET.ROOT
   CADMODEL:  'mainbody.ply'       # w.r.t. DATASET.ROOT
