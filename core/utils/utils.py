@@ -211,20 +211,28 @@ def load_cad_model(ply_dir, num_points=500):
                 step_size = 1
             points_3d = points_3d[::step_size, :]
             return points_3d[:num_points, :]
-
+            
 def load_camera_intrinsics(camera_json):
     with open(camera_json) as f:
         cam = json.load(f)
 
-    # Into np.array
-    cam = {
-        k: np.array(v, dtype=np.float32) for k, v in cam.items()
-    }
+    # Initialize a new dictionary to store the converted camera parameters
+    cam_converted = {}
 
-    # Compute horizontal FOV
-    cam["horizontalFOV"] = 2 * np.arctan2(0.5 * cam["ppx"] * cam["Nu"], cam["fx"])
+    for k, v in cam.items():
+        # Check if the value is a list (which can include nested lists) or a single float/int value
+        if isinstance(v, list) or isinstance(v, float) or isinstance(v, int):
+            cam_converted[k] = np.array(v, dtype=np.float32)
+        elif isinstance(v, dict):  # For nested dictionaries, handle separately
+            cam_converted[k] = {sub_k: np.array(sub_v, dtype=np.float32) for sub_k, sub_v in v.items()}
+        else:
+            cam_converted[k] = v  # Copy other types directly (e.g., strings)
 
-    return cam
+    # Compute horizontal FOV, assuming 'ppx', 'Nu', and 'fx' are single float values
+    cam_converted["horizontalFOV"] = 2 * np.arctan2(0.5 * cam_converted["ppx"] * cam_converted["Nu"], cam_converted["fx"])
+
+    return cam_converted
+
 
 # -----------------------------------------------------------------------
 # Miscellaneous functions.
