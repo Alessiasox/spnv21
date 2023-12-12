@@ -12,7 +12,7 @@ CUDNN:
   DETERMINISTIC: False
   ENABLED: True
 DATASET:
-  ROOT: '/content/drive/My Drive/Dataset/RandomLables/images/synthetic'
+  ROOT: '/content/drive/MyDrive/Dataset/RandomLables/images/synthetic'
   DATANAME: 'images'
   CAMERA: 'camera.json'
   KEYPOINTS: 'tango3Dpoints.mat' # w.r.t. DATASET.ROOT
