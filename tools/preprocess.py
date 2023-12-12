@@ -107,7 +107,7 @@ def main():
 
         # ---------- Read image & resize & save
         filename = labels[idx]['filename']
-        image    = cv2.imread(os.path.join(datadir, domain, 'images', filename), cv2.IMREAD_COLOR)
+        image    = cv2.imread(os.path.join(datadir, domain, filename), cv2.IMREAD_COLOR)
         image    = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         # image    = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
         image    = cv2.resize(image, cfg.DATASET.INPUT_SIZE)
