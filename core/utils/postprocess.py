@@ -178,14 +178,15 @@ def quat2dcm(q):
 
     return dcm
 
-def project_keypoints(q, r, K, dist, keypoints):
-    """ Projecting 3D keypoints to 2D
-        q: quaternion (np.array)
-        r: position   (np.array)
-        K: camera intrinsic (3,3) (np.array)
-        dist: distortion coefficients (5,) (np.array)
-        keypoints: N x 3 or 3 x N (np.array)
-    """
+def project_keypoints(q, r, K, keypoints):
+    # Local definition of distortion coefficients
+    local_dist_coeffs = np.array([-0.22383016606510672,  # k1
+                                  0.51409797089106379,   # p1
+                                  -0.00066499611998340662, # p2
+                                  -0.00021404771667484594, # k3
+                                  -0.13124227429077406],  # k4
+                                 dtype=np.float32)
+
     # Make sure keypoints are 3 x N
     if keypoints.shape[0] != 3:
         keypoints = np.transpose(keypoints)
@@ -193,21 +194,22 @@ def project_keypoints(q, r, K, dist, keypoints):
     # Keypoints into 4 x N homogenous coordinates
     keypoints = np.vstack((keypoints, np.ones((1, keypoints.shape[1]))))
 
-    # transformation to image frame
+    # Transformation to image frame
     pose_mat = np.hstack((np.transpose(quat2dcm(q)), np.expand_dims(r, 1)))
-    xyz      = np.dot(pose_mat, keypoints) # [3 x N]
-    x0, y0   = xyz[0,:] / xyz[2,:], xyz[1,:] / xyz[2,:] # [1 x N] each
+    xyz = np.dot(pose_mat, keypoints) # [3 x N]
+    x0, y0 = xyz[0,:] / xyz[2,:], xyz[1,:] / xyz[2,:] # [1 x N] each
 
-    # apply distortion
+    # Apply distortion
     r2 = x0*x0 + y0*y0
-    cdist = 1 + dist[0]*r2 + dist[1]*r2*r2 + dist[4]*r2*r2*r2
-    x  = x0*cdist + dist[2]*2*x0*y0 + dist[3]*(r2 + 2*x0*x0)
-    y  = y0*cdist + dist[2]*(r2 + 2*y0*y0) + dist[3]*2*x0*y0
+    cdist = 1 + local_dist_coeffs[0]*r2 + local_dist_coeffs[1]*r2*r2 + local_dist_coeffs[4]*r2*r2*r2
+    x = x0*cdist + local_dist_coeffs[2]*2*x0*y0 + local_dist_coeffs[3]*(r2 + 2*x0*x0)
+    y = y0*cdist + local_dist_coeffs[2]*(r2 + 2*y0*y0) + local_dist_coeffs[3]*2*x0*y0
 
-    # apply camera matrix
+    # Apply camera matrix
     points2D = np.vstack((K[0,0]*x + K[0,2], K[1,1]*y + K[1,2]))
 
     return points2D
+
 
 def pnp(points_3D, points_2D, cameraMatrix, distCoeffs=None, rvec=None, tvec=None, useExtrinsicGuess=False):
     if distCoeffs is None:

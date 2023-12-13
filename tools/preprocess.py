@@ -130,11 +130,8 @@ def main():
             keypts3d_origin = np.concatenate((np.zeros((3,1), dtype=np.float32),
                                             np.transpose(keypts3d)), axis=1) # [3, 12]
 
-            keypts2d = project_keypoints(q_vbs2tango,
-                                        r_Vo2To_vbs,
-                                        camera['cameraMatrix'],
-                                        camera['distCoeffs'],
-                                        keypts3d_origin) # (2, 12)
+            keypts2d = project_keypoints(q_vbs2tango, r_Vo2To_vbs, camera['cameraMatrix'], keypts3d_origin)
+
 
             keypts2d[0] = keypts2d[0] / camera['Nu']
             keypts2d[1] = keypts2d[1] / camera['Nv']
