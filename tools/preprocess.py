@@ -47,6 +47,15 @@ def parse_args():
 
     args = parser.parse_args()
 
+    parser = argparse.ArgumentParser(description='Preprocessing SPEED+.')
+    parser.add_argument('--cfg', help='experiment configure file name', required=True, type=str)
+    parser.add_argument('opts', help="Modify config options using the command-line", default=None, nargs=argparse.REMAINDER)
+    parser.add_argument('--jsonfile', required=True, type=str)
+    parser.add_argument('--no_masks', dest='load_masks', action='store_false')
+    parser.add_argument('--no_labels', dest='load_labels', action='store_false')
+    args = parser.parse_args()
+    return args
+
     return args
 
 def main():
@@ -173,5 +182,39 @@ def main():
 
     print('done\n\n')
 
+
+    args = parse_args()
+    update_config(cfg, args)
+
+    datadir = os.path.join(cfg.DATASET.ROOT, cfg.DATASET.DATANAME)
+    print(f"Data directory (datadir): {datadir}")
+
+    # Read labels from JSON file
+    jsonfile = os.path.join(cfg.DATASET.ROOT, args.jsonfile)
+    print(f'Reading JSON file from {jsonfile}...')
+    with open(jsonfile, 'r') as f:
+        labels = json.load(f) # list
+
+    # Determine domain and split
+    if '/' in args.jsonfile:
+        domain, split = args.jsonfile.split('/')
+    else:
+        domain = ''
+        split = args.jsonfile
+    print(f"Domain: {domain}, Split: {split}")
+
+    # Paths for CSV, images, and masks
+    outdir = os.path.join(datadir, domain, 'labels')
+    csvfile = os.path.join(outdir, split.replace('json', 'csv'))
+    imagedir = os.path.join(datadir, domain, f'images_{cfg.DATASET.INPUT_SIZE[0]}x{cfg.DATASET.INPUT_SIZE[1]}_RGB')
+    maskdir = os.path.join(datadir, domain, f'masks_{int(cfg.DATASET.INPUT_SIZE[0]/cfg.DATASET.OUTPUT_SIZE[0])}x{int(cfg.DATASET.INPUT_SIZE[1]/cfg.DATASET.OUTPUT_SIZE[0])}')
+
+    print(f"CSV file will be saved to: {csvfile}")
+    print(f"Resized images will be saved to: {imagedir}")
+    print(f"Resized masks will be saved to: {maskdir}")
+
 if __name__=='__main__':
     main()
+
+    
+

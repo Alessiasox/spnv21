@@ -183,7 +183,7 @@ class SPEEDPLUSDataset(torch.utils.data.Dataset):
         # Read
         imgpath = join(self.root, self.domain, folder, self.csv.iloc[index, 0])
         data    = cv2.imread(imgpath, cv2.IMREAD_COLOR)
-        # data    = cv2.cvtColor(data, cv2.BGR2RGB) # Uncomment if actual RGB color image
+        data    = cv2.cvtColor(data, cv2.BGR2RGB) # Uncomment if actual RGB color image
         return data
 
     def _load_mask(self, index):
